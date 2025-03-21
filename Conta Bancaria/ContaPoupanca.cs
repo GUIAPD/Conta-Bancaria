@@ -10,7 +10,7 @@ namespace Conta_Bancaria
     {
         public ContaPoupanca(int numeroConta, string titular, double saldo) : base(numeroConta, titular, saldo)
         {
-
+            PorcentualDeposito = 0.5;
         }
         public double DepositarPoupança(double BotarValorP)
         {

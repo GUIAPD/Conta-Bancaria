@@ -10,7 +10,7 @@ namespace Conta_Bancaria
     {
         public ContaCorrente(int numeroConta, string titular, double saldo) : base(numeroConta, titular, saldo)
         {
-           
+            Taxa = 5;
         }
         public double SacarCorrente(double SaqueCorrente)
         {

@@ -7,33 +7,59 @@ using System.Threading.Tasks;
 
 namespace Conta_Bancaria
 {
-    internal class ContaBancaria
+    public class ContaBancaria
     {
-        private int _numeroConta { get; set; }
-        private string _titular { get; set; }
-        private double _saldo { get; set; }
-
+        private int _numeroConta;
+        private string _titular;
+        private double _saldo;
+        private double _taxa;
+        private double _porcentualDeposito;
+        public int numero
+        {
+            get { return _numeroConta; }
+            set { _numeroConta = value;}
+        }
+        public string Titular
+        {
+            get { return _titular; }
+            set { _titular = value; }
+        }
+        public double Saldo
+        {
+            get { return _saldo; }
+            set { _saldo = value; }
+        }
+        protected double Taxa
+        {
+            get { return _taxa; }
+            set { _taxa = value; }
+        }
+        protected double PorcentualDeposito
+        {
+            get { return _porcentualDeposito; }
+            set { _porcentualDeposito = value;}
+        }
         public ContaBancaria(int numeroConta, string titular, double saldo)
         {
-            _numeroConta = numeroConta;
-            _titular = titular;
-            _saldo = saldo;
+            numero = numeroConta;
+            Titular = titular;
+            Saldo = saldo;
             
         }
         public double Depositar(double BotarValor)
         {
-            _saldo += BotarValor;
+            Saldo += BotarValor * (1 + PorcentualDeposito/100);
             return BotarValor;
         }
         public bool TemValor()
         {
-            return _saldo > 0;
+            return Saldo > 0;
         }
         public double Sacar(double Saque)
         {
-            if (TemValor() && Saque < _saldo)
+            if (TemValor() && Saque < Saldo)
             {
-                _saldo -= Saque;
+                Saldo -= (Saque + Taxa);
                 return Saque;
             }
             else
@@ -45,7 +71,7 @@ namespace Conta_Bancaria
         public void ExibirSaldo()
         {
             Console.WriteLine(_titular);
-            Console.WriteLine($"Saldo atual: R${_saldo}");
+            Console.WriteLine($"Saldo atual: R${Saldo}");
         }
     }
 }
